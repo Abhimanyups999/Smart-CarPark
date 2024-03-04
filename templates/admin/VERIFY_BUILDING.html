@@ -1,0 +1,44 @@
+{% extends 'admin/admin_index.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-active">
+    <tr>
+      <th >SL NO</th>
+      <th >BUILDING NAME</th>
+      <th >NUMBER OF FLOORS</th>
+      <th >PLACE</th>
+      <th >POST</th>
+      <th >PIN</th>
+      <th >EMAIL</th>
+      <th ></th>
+
+    </tr>
+       {% for i in data %}
+    <tr>
+      <td>&nbsp;{{ loop.index }}</td>
+      <td> {{ i.building_name }}</td>
+      <td>&nbsp;{{ i.no_of_floor }}</td>
+      <td>&nbsp;{{ i.place }}</td>
+      <td>&nbsp;{{ i.post }}</td>
+      <td>&nbsp;{{ i.pincode }}</td>
+      <td>&nbsp;{{ i.email }}</td>
+        {% if i.user_type =='pending' %}
+            <td ><a href="/APPROVE/{{ i.login_id }}" class="btn btn-primary" onclick="return confirm('Are you sure to approve?')">APPROVE</a><br><br/><a href="/REJECT/{{ i.login_id }}" class="btn btn-danger" onclick="return confirm('ARE YOU SURE TO REJECT?')" style="width: 80%">REJECT</a></td>
+        {% else %}
+            <td>{{ i.user_type }}</td>
+        {% endif %}
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}
